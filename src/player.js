@@ -1,4 +1,4 @@
-import GameBoard from './gameboard';
+import GameBoard from "./gameboard";
 
 function Player() {
   const possibleMoves = [];
@@ -19,7 +19,7 @@ function Player() {
       const randomIndex = Math.floor(Math.random() * possibleMoves.length);
       const move = possibleMoves.splice(randomIndex, 1)[0];
       this.attack(enemyBoard, move.x, move.y);
-    }
+    },
   };
 }
 export default Player;
