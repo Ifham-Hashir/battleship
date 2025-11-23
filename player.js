@@ -1,6 +1,12 @@
 import GameBoard from './gameboard';
 
 function Player() {
+  const possibleMoves = [];
+  for (let x = 0; x < 10; x++) {
+    for (let y = 0; y < 10; y++) {
+      possibleMoves.push({ x, y });
+    }
+  }
   return {
     gameboard: GameBoard(),
 
@@ -8,10 +14,11 @@ function Player() {
       enemyBoard.receiveAttack(x, y);
     },
 
-    randomAttack(enemyBoard){
-      const x = Math.floor(Math.random() * 10);
-      const y = Math.floor(Math.random() * 10);
-      this.attack(enemyBoard, x, y);
+    randomAttack(enemyBoard) {
+      if (possibleMoves.length === 0) return;
+      const randomIndex = Math.floor(Math.random() * possibleMoves.length);
+      const move = possibleMoves.splice(randomIndex, 1)[0];
+      this.attack(enemyBoard, move.x, move.y);
     }
   };
 }

@@ -13,4 +13,15 @@ test('should make a random attack on the enemy board', () => {
   const enemyBoard = GameBoard();
   computer.randomAttack(enemyBoard);
   expect(enemyBoard.getMissedShots().length).toBe(1);
-})
+});
+
+test('should ensure computer does not make the same move twice', () => {
+  const computer = Player();
+  const enemyBoard = GameBoard();
+  for (let i = 0; i < 20; i++) {
+    computer.randomAttack(enemyBoard);
+  }
+  const missedShots = enemyBoard.getMissedShots();
+  const uniqueShots = new Set(missedShots.map(shot => JSON.stringify(shot)));
+  expect(uniqueShots.size).toBe(20);
+});
